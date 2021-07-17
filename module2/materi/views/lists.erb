@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>List</title>
+</head>
+
+<body>
+<ul>
+   <% lists.each do |list| %>
+    <li><%= list%></li>
+   <% end %>
+</ul>
+<br>
+<form action="/lists" method="POST">
+    <label for="lists">List</label><br>
+    <input type="text" name='lists'><br>
+    <input type="submit"><br>
+</form>
+</body>
+
+</html>
