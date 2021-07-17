@@ -1,0 +1,99 @@
+#Create table Customers
+
+create table customers(
+id int NOT NULL AUTO_INCREMENT,
+name varchar(30),
+no_phone varchar(30),
+PRIMARY KEY(id)
+);
+
+#Create table Menu
+
+create table menu(
+id int NOT NULL AUTO_INCREMENT,
+name varchar(30),
+price int,
+PRIMARY KEY(id)
+);
+
+#Create table Orders
+
+create table orders(
+id int NOT NULL AUTO_INCREMENT,
+order_date date,
+user_id int,
+PRIMARY KEY(id)
+);
+
+
+#Create table Order_details
+
+create table order_details(
+order_id int,
+menu_id int,
+quantity int
+);
+
+#FK Table orders
+ALTER TABLE orders
+ADD FOREIGN KEY(user_id) REFERENCES customers(id);
+
+#FK Table orders_details
+ALTER TABLE order_details
+ADD CONSTRAINT FK_order_id
+FOREIGN KEY(order_id) REFERENCES orders(id);
+
+ALTER TABLE order_details
+ADD CONSTRAINT FK_menu_id
+FOREIGN KEY(menu_id) REFERENCES menu(id);
+
+
+Insert Customers
+
+insert into customers(name,no_phone)values('Fahry Fauzan','082116622112');
+insert into customers(name,no_phone) values('Budi Rahman','08321234343');
+insert into customers(name,no_phone) values('Fauzan Hikmah','081233235654');
+insert into customers(name,no_phone) values('Bagoes Rama','082256476543');
+insert into customers(name,no_phone) values('Roid Akbar','081256543256');
+
+insert Menu
+
+insert into menu(name,price) values('Nasi Goreng',12000);
+insert into menu(name,price) values('Puding',8000);
+insert into menu(name,price) values('Mie Goreng',12000);
+insert into menu(name,price) values('Steak',80000);
+insert into menu(name,price) values('Air Mineral',5000);
+
+Insert Orders
+
+insert into orders(order_date,user_id) values('2021-7-12',1);
+insert into orders(order_date,user_id) values('2021-7-12',2);
+insert into orders(order_date,user_id) values('2021-7-12',3);
+insert into orders(order_date,user_id) values('2021-7-13',4);
+insert into orders(order_date,user_id) values('2021-7-14',5);
+
+insert Order_details
+
+insert into order_details(order_id,menu_id,quantity) values(2,1,1);
+insert into order_details(order_id,menu_id,quantity) values(2,2,1);
+insert into order_details(order_id,menu_id,quantity) values(3,3,1);
+insert into order_details(order_id,menu_id,quantity) values(3,4,1);
+insert into order_details(order_id,menu_id,quantity) values(4,5,1);
+insert into order_details(order_id,menu_id,quantity) values(4,2,1);
+insert into order_details(order_id,menu_id,quantity) values(5,3,1);
+insert into order_details(order_id,menu_id,quantity) values(5,2,1);
+insert into order_details(order_id,menu_id,quantity) values(6,1,1);
+insert into order_details(order_id,menu_id,quantity) values(6,4,1);
+
+
+Display
+
+
+select order_details.order_id, customers.name as "Customer Name", customers.no_phone as "Customer Phone",sum(menu.price * order_details.quantity) as "Total" ,group_concat(menu.name) as "Items Bought"
+from order_details
+join orders on orders.id = order_details.order_id
+join customers on customers.id = orders.user_id
+join menu on menu.id = order_details.menu_id
+group by order_id;
+
+
