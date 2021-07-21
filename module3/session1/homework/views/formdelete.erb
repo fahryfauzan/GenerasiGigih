@@ -1,0 +1,6 @@
+<% items.each do |item| %>
+    <form action="/item/delete/<%= item.id%>" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete Item <%= item.name%>?">
+    </form>
+<% end %>

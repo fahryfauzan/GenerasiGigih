@@ -1,0 +1,8 @@
+<body>
+    <% itemscat.each do |icat| %>
+        <h1>Item Details</h1></br>
+        <h3>Name : <%= icat.name%></h3></br>
+        <h3>Price : <%= icat.price%></h3></br>
+        <h3>Category : <%= icat.category.name%></h3>
+    <% end %>
+</body>
