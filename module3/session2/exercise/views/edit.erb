@@ -1,0 +1,16 @@
+<body>
+    <h1> Edit Item</h1>
+    <% itemscat.each do |icat| %>
+        <form method="POST" action="/item/update/<%= icat.id%>">
+            <input type="hidden" name="_method" value="PUT">
+            <input type="text" name="name" placeholder="Item name" value="<%= icat.name%>">
+            <input type="text" name="price" placeholder="Item price" value="<%= icat.price%>">
+            <select name="category">
+                <% categories.each do |cat| %>
+                    <option value="<%= cat.name%>"><%= cat.name%></option>
+                <% end %>
+            </select>
+    <% end %>
+        <button type="submit">Update item</button>
+    </form>
+</body>

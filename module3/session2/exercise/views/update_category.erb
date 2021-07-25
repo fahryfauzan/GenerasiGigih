@@ -1,0 +1,10 @@
+<body>
+    <h1> Edit Category</h1>
+    <% category.each do |cat| %>
+        <form method="POST" action="/category/update/<%= cat.id%>">
+            <input type="hidden" name="_method" value="PUT">
+            <input type="text" name="name" placeholder="Item name" value="<%= cat.name%>">
+    <% end %>
+        <button type="submit">Update item</button>
+    </form>
+</body>

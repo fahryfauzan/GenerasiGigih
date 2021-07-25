@@ -1,0 +1,18 @@
+<table>
+<h1>Categories</h1>
+    <thead>
+        <th>Name</th>
+        <th colspan=3>Action</th>
+    </thead>
+    <tbody>
+        <% categories.each do |category| %>
+            <tr>
+                <td><%= category.name%></td>
+                <td><a href="/category/show/<%= category.id %>">Show</a></td>
+                <td><a href="/category/edit/<%= category.id %>">Edit</a></td>
+                <td><a href="/category/delete/<%= category.id %>">Delete</a></td>
+            </tr>
+        <% end %>
+    <tbody>
+</table>
+<a href="/category/new">New categories</a>
