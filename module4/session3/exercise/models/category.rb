@@ -1,9 +1,9 @@
-require './db/mysql_connector.rb'
+#require './db/mysql_connector.rb'
 
 class Category
     attr_accessor :id, :name, :items
 
-    def initialize(id,name)
+    def initialize(id, name)
         #raise ArgumentError, 'Params not valid' unless category_created?(cat)
         @id = id
         @name = name
@@ -11,18 +11,22 @@ class Category
     end
 
     def to_s
-        @name.to_s
+        "#{name}"
     end
 
     def valid?
-        return false unless @name.nil?
+        return false if @name.nil?
+
+        true
     end
     
     def save
-        #return false unless valid?  
+        return false unless valid?  
 
         client = create_db_client
         client.query("INSERT INTO categories(name) VALUES('#{name}')")
+
+        true
     end
 
     def self.get_all_categories
@@ -75,12 +79,20 @@ class Category
     end
 
     def self.update(id,name)
+        return false unless valid? 
+
         client = create_db_client
         client.query("Update categories set name = '#{name}' where id = '#{id}'")
+
+        true
     end
 
     def self.delete(id)
+        return false unless valid? 
+
         client = create_db_client
         client.query("delete from categories where id= #{id}")
+
+        true
     end
 end
