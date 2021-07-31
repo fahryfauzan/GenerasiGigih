@@ -35,7 +35,12 @@ describe Category do
 
     describe "#View Success" do
         context "When view data is valid" do
-            
+            it 'Should be Dislay all categories' do
+                mock_client = double
+                allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+                expect(mock_client).to receive(:query).with("select * from categories")
+                expect(category.all).to eq(true)
+            end
         end
 
         context "When view data is not valid" do
